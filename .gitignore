@@ -1,0 +1,7 @@
+build/
+builddir/
+buildclang/
+*~
+*.o
+*.log
+.vscode/
