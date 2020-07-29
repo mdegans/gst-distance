@@ -5,3 +5,5 @@ buildclang/
 *.o
 *.log
 .vscode/
+subprojects/packagecache
+subprojects/googletest-release-*

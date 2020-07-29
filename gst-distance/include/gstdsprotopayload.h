@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-typedef ProtoPayloadFilter ProtoPayloadFilter;
+typedef ds::ProtoPayloadFilter ProtoPayloadFilter;
 
 #define GST_TYPE_DSPROTOPAYLOAD (gst_dsprotopayload_get_type())
 G_DECLARE_FINAL_TYPE(GstDsProtoPayload,

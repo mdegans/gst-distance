@@ -1,0 +1,3 @@
+[wrap-git]
+url = https://github.com/mdegans/libdistanceproto.git
+revision = v0.4.0

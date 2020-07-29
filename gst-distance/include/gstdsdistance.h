@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-typedef DistanceFilter DistanceFilter;
+typedef ds::DistanceFilter DistanceFilter;
 
 #define GST_TYPE_DSDISTANCE (gst_dsdistance_get_type())
 G_DECLARE_FINAL_TYPE(GstDsDistance,

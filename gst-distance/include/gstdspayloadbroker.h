@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-typedef BaseFilter BaseFilter;
+typedef ds::BaseFilter BaseFilter;
 
 typedef enum {
   PAYLOAD_BROKER_MODE_PROPERTY,

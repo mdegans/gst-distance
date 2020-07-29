@@ -226,7 +226,7 @@ static gboolean gst_dspayloadbroker_start(GstBaseTransform* base) {
   switch (self->mode)
   {
     case PAYLOAD_BROKER_MODE_PROPERTY:
-      self->filter = new PyPayloadBroker();
+      self->filter = new ds::PyPayloadBroker();
       break;
     case PAYLOAD_BROKER_MODE_PROTO:
       if (self->basepath == nullptr) {
@@ -234,8 +234,8 @@ static gboolean gst_dspayloadbroker_start(GstBaseTransform* base) {
         return false;
       }
       GST_DEBUG("creating FileMetaBroker with path %s and mode: proto", self->basepath);
-      self->filter = new FileMetaBroker(self->basepath, FileMetaBroker::proto);
-      ((FileMetaBroker*)self->filter)->start();
+      self->filter = new ds::FileMetaBroker(self->basepath, ds::FileMetaBroker::proto);
+      ((ds::FileMetaBroker*)self->filter)->start();
       break;
     case PAYLOAD_BROKER_MODE_CSV:
       if (self->basepath == nullptr) {
@@ -243,8 +243,8 @@ static gboolean gst_dspayloadbroker_start(GstBaseTransform* base) {
         return false;
       }
       GST_DEBUG("creating FileMetaBroker with path %s and mode: csv", self->basepath);
-      self->filter = new FileMetaBroker(self->basepath, FileMetaBroker::csv);
-      ((FileMetaBroker*)self->filter)->start();
+      self->filter = new ds::FileMetaBroker(self->basepath, ds::FileMetaBroker::csv);
+      ((ds::FileMetaBroker*)self->filter)->start();
       break;
     default:
       GST_ERROR_OBJECT(self, "mode property broken");
@@ -269,7 +269,7 @@ static gboolean gst_dspayloadbroker_stop(GstBaseTransform* base) {
   {
     case PAYLOAD_BROKER_MODE_PROTO:
     case PAYLOAD_BROKER_MODE_CSV:
-      ((FileMetaBroker*)self->filter)->stop();
+      ((ds::FileMetaBroker*)self->filter)->stop();
       break;
     default:
       break;
@@ -332,7 +332,7 @@ static void gst_dspayloadbroker_get_property(GObject* object,
                                            GParamSpec* pspec) {
   GstDsPayloadBroker* self = GST_DSPAYLOADBROKER(object);
   gchararray results = nullptr;
-  PyPayloadBroker* pybroker = nullptr;
+  ds::PyPayloadBroker* pybroker = nullptr;
   switch (prop_id) {
     case PROP_SILENT:
       g_value_set_boolean(value, self->silent);
@@ -345,7 +345,7 @@ static void gst_dspayloadbroker_get_property(GObject* object,
         g_value_set_string(value, nullptr);
         break;
       }
-      pybroker = (PyPayloadBroker*) self->filter;
+      pybroker = (ds::PyPayloadBroker*) self->filter;
       results = pybroker->get_payload();
       if (results != nullptr) {
         g_value_take_string(value, results);
