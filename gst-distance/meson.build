@@ -39,9 +39,19 @@ gst_distance = shared_library(
   install_dir: plugins_install_dir,
 )
 
-#pkg-config
+# this is a dependency for subproects, designed for use with
+# a dummy target just to make sure it builds and installs.
+gst_distance_dep = declare_dependency(
+  dependencies: deps,
+  link_with: gst_distance,
+)
+
+# pkg-config
+# this exists mostly for subprojects to check if the plugin
+# is installed.
 pkg = import('pkgconfig')
 distance_pc = pkg.generate(gst_distance,
+  version: meson.project_version(),
   description: package_description,
   url: package_uri,
   # for consistency with existing cmake install:
