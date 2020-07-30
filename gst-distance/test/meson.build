@@ -25,7 +25,7 @@ gst_check_dep = dependency('gstreamer-check-1.0')
 foreach t: tests
   exe = executable(t['filename'], t['sources'],
     dependencies: [deps, gst_check_dep],
-    link_with: gst_cuda_plugin,
+    link_with: gst_distance,
     include_directories: plugin_incdir,
   )
   test(t['description'], exe,

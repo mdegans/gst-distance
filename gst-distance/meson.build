@@ -30,13 +30,22 @@ deps = [
 ]
 
 # plugin library target
-gst_cuda_plugin = shared_library(
+gst_distance = shared_library(
   # library name, sources
-  'gstdistance', plugin_sources,
+  package_name, plugin_sources,
   dependencies: deps,
   include_directories: [plugin_incdir, config_incdir],
   install: true,
   install_dir: plugins_install_dir,
+)
+
+#pkg-config
+pkg = import('pkgconfig')
+distance_pc = pkg.generate(gst_distance,
+  description: package_description,
+  url: package_uri,
+  # for consistency with existing cmake install:
+  install_dir: get_option('datadir') / 'pkgconfig'
 )
 
 # add test subdir
