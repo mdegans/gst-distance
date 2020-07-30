@@ -58,5 +58,7 @@ distance_pc = pkg.generate(gst_distance,
   install_dir: get_option('datadir') / 'pkgconfig'
 )
 
+gst_distance_so_path = meson.current_build_dir()
+
 # add test subdir
 subdir('test')

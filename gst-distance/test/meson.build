@@ -33,7 +33,7 @@ foreach t: tests
     # TODO(mdegans): research if there is a dedicated parent directory function
     env: [
       'GST_DEBUG=4',
-      'GST_PLUGIN_PATH=' + meson.current_build_dir() + '/../',
+      'GST_PLUGIN_PATH=' + gst_distance_so_path,
       'GST_REGISTRY_UPDATE=yes',
     ],
   )
