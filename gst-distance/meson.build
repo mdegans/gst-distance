@@ -30,14 +30,35 @@ deps = [
 ]
 
 # plugin library target
-gst_cuda_plugin = shared_library(
+gst_distance = shared_library(
   # library name, sources
-  'gstdistance', plugin_sources,
+  package_name, plugin_sources,
   dependencies: deps,
   include_directories: [plugin_incdir, config_incdir],
   install: true,
   install_dir: plugins_install_dir,
 )
+
+# this is a dependency for subproects, designed for use with
+# a dummy target just to make sure it builds and installs.
+gst_distance_dep = declare_dependency(
+  dependencies: deps,
+  link_with: gst_distance,
+)
+
+# pkg-config
+# this exists mostly for subprojects to check if the plugin
+# is installed.
+pkg = import('pkgconfig')
+distance_pc = pkg.generate(gst_distance,
+  version: meson.project_version(),
+  description: package_description,
+  url: package_uri,
+  # for consistency with existing cmake install:
+  install_dir: get_option('datadir') / 'pkgconfig'
+)
+
+gst_distance_so_path = meson.current_build_dir()
 
 # add test subdir
 subdir('test')

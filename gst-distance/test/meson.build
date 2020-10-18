@@ -25,7 +25,7 @@ gst_check_dep = dependency('gstreamer-check-1.0')
 foreach t: tests
   exe = executable(t['filename'], t['sources'],
     dependencies: [deps, gst_check_dep],
-    link_with: gst_cuda_plugin,
+    link_with: gst_distance,
     include_directories: plugin_incdir,
   )
   test(t['description'], exe,
@@ -33,7 +33,7 @@ foreach t: tests
     # TODO(mdegans): research if there is a dedicated parent directory function
     env: [
       'GST_DEBUG=4',
-      'GST_PLUGIN_PATH=' + meson.current_build_dir() + '/../',
+      'GST_PLUGIN_PATH=' + gst_distance_so_path,
       'GST_REGISTRY_UPDATE=yes',
     ],
   )
